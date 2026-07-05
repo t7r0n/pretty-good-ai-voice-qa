@@ -21,7 +21,7 @@ Status: ready for video recording and final form submission.
 - [x] Transcripts: 20 JSON transcripts and 20 timestamped markdown transcripts.
 - [x] Bug report: [BUG_REPORT.md](BUG_REPORT.md).
 - [x] Single allowed assessment target: enforced in code as `+18054398008`.
-- [x] Tests: `54 passed`.
+- [x] Tests: `55 passed`.
 - [x] Submission artifact validator: `uv run voiceqa evidence-manifest` then `uv run voiceqa validate-submission` passes.
 - [x] Validation report: [artifacts/campaign_20260705/VALIDATION_REPORT.md](artifacts/campaign_20260705/VALIDATION_REPORT.md).
 - [ ] Loom walkthrough link.

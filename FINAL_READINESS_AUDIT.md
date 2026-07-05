@@ -26,6 +26,7 @@ The repository and evidence package are ready for video recording and official f
 | Evidence integrity manifest | [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md) | Proven |
 | Official form handoff | [FORM_ANSWERS.md](FORM_ANSWERS.md) | Proven |
 | Video recording runbook | [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) | Proven |
+| Video-link application path | `tests/test_voice_qa.py::test_apply_video_links_makes_final_readiness_pass` | Proven |
 
 ## External Pending Items
 
@@ -46,6 +47,8 @@ uv run voiceqa validate-submission
 uv run python -m compileall -q src tests scripts
 uv build --out-dir artifacts/build_dist
 ```
+
+The test suite includes a finalization dry run that applies placeholder public video URLs to a complete fixture and verifies `validate_final_readiness` turns green.
 
 Expected pre-video state:
 

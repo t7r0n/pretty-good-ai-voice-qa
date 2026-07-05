@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 from typer.testing import CliRunner
@@ -316,6 +318,36 @@ def test_final_readiness_passes_with_video_links(tmp_path: Path, monkeypatch) ->
     assert result.summary["final_ready"] == 1
 
 
+def test_apply_video_links_makes_final_readiness_pass(tmp_path: Path, monkeypatch) -> None:
+    source_root = Path.cwd()
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("PATH", "")
+    campaign = _write_submission_fixture(tmp_path, complete_calls=10)
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    shutil.copy(source_root / "scripts" / "apply_video_links.py", scripts / "apply_video_links.py")
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/apply_video_links.py",
+            "--loom",
+            "https://loom.example.com/share/final",
+            "--debug",
+            "https://videos.example.com/final-debug",
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    readiness = validate_final_readiness(campaign)
+    assert readiness.ok is True
+    assert readiness.summary["final_ready"] == 1
+
+
 def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
     for name in [
         "ARCHITECTURE.md",
@@ -354,7 +386,27 @@ def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
         )
         + "\n"
     )
-    (workspace / "README.md").write_text(f"- Public GitHub repository: [{REPOSITORY_URL}]({REPOSITORY_URL})\n")
+    (workspace / "FORM_ANSWERS.md").write_text(
+        "\n".join(
+            [
+                f"Official form: [{FORM_URL}]({FORM_URL})",
+                f"- GitHub repository: [{REPOSITORY_URL}]({REPOSITORY_URL})",
+                "- Loom walkthrough link: Pending Loom walkthrough URL.",
+                "- AI-debugging screen recording link: Pending AI-debugging screen recording URL.",
+            ]
+        )
+        + "\n"
+    )
+    (workspace / "README.md").write_text(
+        "\n".join(
+            [
+                f"- Public GitHub repository: [{REPOSITORY_URL}]({REPOSITORY_URL})",
+                "- [LOOM.md](LOOM.md): 5-minute walkthrough script.",
+                "- [AI_DEBUGGING_RECORDING.md](AI_DEBUGGING_RECORDING.md): 5-minute AI-debugging recording script.",
+            ]
+        )
+        + "\n"
+    )
 
     campaign = workspace / "artifacts" / "campaign_20260705"
     for subdir in ["recordings", "transcripts", "transcripts_md", "events"]:
