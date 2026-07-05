@@ -320,6 +320,7 @@ def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
     for name in [
         "ARCHITECTURE.md",
         "REVIEWER_BRIEF.md",
+        "FINAL_READINESS_AUDIT.md",
         "RECORDING_RUNBOOK.md",
         "FORM_ANSWERS.md",
         "REQUIREMENTS_AUDIT.md",

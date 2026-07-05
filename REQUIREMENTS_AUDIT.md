@@ -2,7 +2,7 @@
 
 Source: `Pretty Good AI - AI Engineering Challenge (Final).pdf`
 
-Status: local artifact package is ready for video recording and GitHub publication. The remaining external steps are adding the Loom link, adding the AI-debugging recording link, publishing a public GitHub repository, and submitting the official form with the single caller number used.
+Status: public artifact package is ready for video recording and final form submission. The remaining external steps are adding the Loom link, adding the AI-debugging recording link, and submitting the official form with the single caller number used.
 
 ## Deliverables
 
@@ -11,7 +11,7 @@ Status: local artifact package is ready for video recording and GitHub publicati
 | Working Python voice bot | `src/voice_qa/`, `pyproject.toml`, `uv.lock` | Ready |
 | README with setup/run instructions | `README.md` | Ready |
 | Architecture doc, 1-2 paragraph explanation | `ARCHITECTURE.md` | Ready |
-| Minimum 10 full calls | 20 real calls across `artifacts/campaign_20260705/CALL_INDEX.md` and `artifacts/campaign_20260705_clean/CALL_INDEX.md`; first-listening order in `VOICE_QUALITY_REVIEW.md` | Ready |
+| Minimum 10 call evidence sets | 20 real call evidence sets across `artifacts/campaign_20260705/CALL_INDEX.md` and `artifacts/campaign_20260705_clean/CALL_INDEX.md`; first-listening order in `VOICE_QUALITY_REVIEW.md` | Ready |
 | Audio recordings in mp3 or ogg | 20 MP3s across the primary and supplemental campaign directories | Ready |
 | Transcripts with both sides | 20 Groq JSON transcripts and 20 timestamped markdown transcripts | Ready |
 | Bug report | `artifacts/campaign_20260705/BUG_REPORT.md` and top-level `BUG_REPORT.md` | Ready |
@@ -40,6 +40,7 @@ Run before publishing:
 
 ```bash
 uv run pytest -q
+uv run voiceqa evidence-manifest
 uv run voiceqa validate-submission
 uv run python -m compileall -q src tests
 uv build --out-dir artifacts/build_dist

@@ -7,6 +7,7 @@ Start here:
 - Public GitHub repository: [t7r0n/pretty-good-ai-voice-qa](https://github.com/t7r0n/pretty-good-ai-voice-qa)
 - Reviewer brief: [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md)
 - Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md)
+- Final readiness audit: [FINAL_READINESS_AUDIT.md](FINAL_READINESS_AUDIT.md)
 - Submission form answers: [FORM_ANSWERS.md](FORM_ANSWERS.md)
 - Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md)
 - [CALL_INDEX.md](CALL_INDEX.md): reviewer entry point for all campaign calls.

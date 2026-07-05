@@ -1,6 +1,6 @@
 # Submission Checklist
 
-Status: ready for video recording and GitHub publication.
+Status: ready for video recording and final form submission.
 
 ## Required Challenge Deliverables
 
@@ -10,6 +10,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Reviewer brief: [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md).
 - [x] Architecture doc: [ARCHITECTURE.md](ARCHITECTURE.md).
 - [x] Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md).
+- [x] Final readiness audit: [FINAL_READINESS_AUDIT.md](FINAL_READINESS_AUDIT.md).
 - [x] Submission form-answer sheet: [FORM_ANSWERS.md](FORM_ANSWERS.md).
 - [x] Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md).
 - [x] Evidence manifest: [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md).
@@ -28,7 +29,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Public GitHub repository link: [t7r0n/pretty-good-ai-voice-qa](https://github.com/t7r0n/pretty-good-ai-voice-qa).
 - [ ] Submission form filled at [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6) with the one Twilio caller number used, in E.164 format.
 
-## Before Publishing GitHub
+## Publication Checks
 
 - [x] Initialize local Git repository on branch `main`.
 - [x] Confirm `.env` is ignored by Git.
@@ -36,19 +37,20 @@ Status: ready for video recording and GitHub publication.
 - [x] Confirm `artifacts/campaign_20260705_clean/` is tracked.
 - [x] Confirm MP3 recordings open from GitHub.
 - [x] Confirm markdown links in `CALL_INDEX.md` and `BUG_REPORT.md` work on GitHub.
-- [x] Confirm top-level `README.md`, `REVIEWER_BRIEF.md`, `FINAL_SUBMISSION_PACKET.md`, `FORM_ANSWERS.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `EVIDENCE_MANIFEST.md`, `LOOM.md`, and this checklist are visible at repo root.
+- [x] Confirm top-level `README.md`, `REVIEWER_BRIEF.md`, `FINAL_SUBMISSION_PACKET.md`, `FINAL_READINESS_AUDIT.md`, `FORM_ANSWERS.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `EVIDENCE_MANIFEST.md`, `LOOM.md`, and this checklist are visible at repo root.
 
 ## Suggested Final Review Order
 
 1. Open [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md).
-2. Open [CALL_INDEX.md](CALL_INDEX.md).
-3. Open [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md) and play `urgent_symptoms` or `weekend_closed`.
-4. Open [BUG_REPORT.md](BUG_REPORT.md).
-5. Play BUG-001 and BUG-002 snippets from the linked recordings.
-6. Verify `uv run pytest -q`, `uv run voiceqa evidence-manifest`, and `uv run voiceqa validate-submission` still pass.
-7. Record Loom walkthrough.
-8. Record AI-debugging walkthrough.
-9. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.
-10. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
-11. Fill the official form from [FORM_ANSWERS.md](FORM_ANSWERS.md), using the local `.env` Twilio caller number.
-12. Commit, push, and submit the form.
+2. Open [FINAL_READINESS_AUDIT.md](FINAL_READINESS_AUDIT.md).
+3. Open [CALL_INDEX.md](CALL_INDEX.md).
+4. Open [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md) and play `urgent_symptoms` or `weekend_closed`.
+5. Open [BUG_REPORT.md](BUG_REPORT.md).
+6. Play BUG-001 and BUG-002 snippets from the linked recordings.
+7. Verify `uv run pytest -q`, `uv run voiceqa evidence-manifest`, and `uv run voiceqa validate-submission` still pass.
+8. Record Loom walkthrough.
+9. Record AI-debugging walkthrough.
+10. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.
+11. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
+12. Fill the official form from [FORM_ANSWERS.md](FORM_ANSWERS.md), using the local `.env` Twilio caller number.
+13. Commit, push, and submit the form.

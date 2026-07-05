@@ -16,6 +16,7 @@ Form-answer sheet: [FORM_ANSWERS.md](FORM_ANSWERS.md)
 ## Reviewer Entry Points
 
 - Reviewer brief: [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md)
+- Final readiness audit: [FINAL_READINESS_AUDIT.md](FINAL_READINESS_AUDIT.md)
 - Voice quality first-listening guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md)
 - Primary call index: [CALL_INDEX.md](CALL_INDEX.md)
 - Curated bug report: [BUG_REPORT.md](BUG_REPORT.md)
