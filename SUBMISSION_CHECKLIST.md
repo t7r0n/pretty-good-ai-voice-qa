@@ -7,6 +7,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Working Python code.
 - [x] README with setup and run instructions.
 - [x] `.env.example` documenting environment variables.
+- [x] Reviewer brief: [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md).
 - [x] Architecture doc: [ARCHITECTURE.md](ARCHITECTURE.md).
 - [x] Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md).
 - [x] Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md).
@@ -38,13 +39,14 @@ Status: ready for video recording and GitHub publication.
 
 ## Suggested Final Review Order
 
-1. Open [CALL_INDEX.md](CALL_INDEX.md).
-2. Open [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md) and play `urgent_symptoms` or `weekend_closed`.
-3. Open [BUG_REPORT.md](BUG_REPORT.md).
-4. Play BUG-001 and BUG-002 snippets from the linked recordings.
-5. Verify `uv run pytest -q`, `uv run voiceqa evidence-manifest`, and `uv run voiceqa validate-submission` still pass.
-6. Record Loom walkthrough.
-7. Record AI-debugging walkthrough.
-8. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.
-9. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
-10. Commit, push, and submit the form.
+1. Open [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md).
+2. Open [CALL_INDEX.md](CALL_INDEX.md).
+3. Open [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md) and play `urgent_symptoms` or `weekend_closed`.
+4. Open [BUG_REPORT.md](BUG_REPORT.md).
+5. Play BUG-001 and BUG-002 snippets from the linked recordings.
+6. Verify `uv run pytest -q`, `uv run voiceqa evidence-manifest`, and `uv run voiceqa validate-submission` still pass.
+7. Record Loom walkthrough.
+8. Record AI-debugging walkthrough.
+9. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.
+10. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
+11. Commit, push, and submit the form.

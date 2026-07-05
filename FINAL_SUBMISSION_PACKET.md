@@ -13,6 +13,7 @@ Submission form: [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdn
 
 ## Reviewer Entry Points
 
+- Reviewer brief: [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md)
 - Voice quality first-listening guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md)
 - Primary call index: [CALL_INDEX.md](CALL_INDEX.md)
 - Curated bug report: [BUG_REPORT.md](BUG_REPORT.md)
