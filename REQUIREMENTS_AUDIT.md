@@ -42,7 +42,7 @@ Run before publishing:
 uv run pytest -q
 uv run voiceqa evidence-manifest
 uv run voiceqa validate-submission
-uv run python -m compileall -q src tests
+uv run python -m compileall -q src tests scripts
 uv build --out-dir artifacts/build_dist
 uv run pg-memory verify
 ```

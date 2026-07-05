@@ -20,7 +20,7 @@ uv run voiceqa validate-submission
 uv run voiceqa final-check
 ```
 
-Expected before video links are applied: `final-check` should fail only because the Loom and AI-debugging URLs are missing. Do not show `.env` or print secret values.
+Expected before video links are applied: `final-check` should fail only because the Loom and AI-debugging URLs are missing and their placeholder text is still present. Do not show `.env` or print secret values.
 
 Open these files in tabs before starting:
 
@@ -67,5 +67,7 @@ git add README.md FINAL_SUBMISSION_PACKET.md FORM_ANSWERS.md SUBMISSION_CHECKLIS
 git commit -m "Add final video links"
 git push
 ```
+
+The automated test `test_apply_video_links_makes_final_readiness_pass` covers this link-application path on a complete fixture.
 
 Then submit the form at [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6) using [FORM_ANSWERS.md](FORM_ANSWERS.md) and the single Twilio caller number from local `.env` in E.164 format.
