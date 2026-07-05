@@ -10,6 +10,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Architecture doc: [ARCHITECTURE.md](ARCHITECTURE.md).
 - [x] Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md).
 - [x] Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md).
+- [x] Evidence manifest: [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md).
 - [x] PDF requirement audit: [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md).
 - [x] Voice quality review guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md).
 - [x] Minimum 10 real call evidence sets: 20 captured calls with MP3 recordings, Groq transcripts, timestamped markdown, and event logs across [artifacts/campaign_20260705/CALL_INDEX.md](artifacts/campaign_20260705/CALL_INDEX.md) and [artifacts/campaign_20260705_clean/CALL_INDEX.md](artifacts/campaign_20260705_clean/CALL_INDEX.md).
@@ -17,8 +18,8 @@ Status: ready for video recording and GitHub publication.
 - [x] Transcripts: 20 JSON transcripts and 20 timestamped markdown transcripts.
 - [x] Bug report: [BUG_REPORT.md](BUG_REPORT.md).
 - [x] Single allowed assessment target: enforced in code as `+18054398008`.
-- [x] Tests: `50 passed`.
-- [x] Submission artifact validator: `uv run voiceqa validate-submission` passes.
+- [x] Tests: `54 passed`.
+- [x] Submission artifact validator: `uv run voiceqa evidence-manifest` then `uv run voiceqa validate-submission` passes.
 - [x] Validation report: [artifacts/campaign_20260705/VALIDATION_REPORT.md](artifacts/campaign_20260705/VALIDATION_REPORT.md).
 - [ ] Loom walkthrough link.
 - [ ] 5-minute AI-debugging screen recording link.
@@ -41,7 +42,7 @@ Status: ready for video recording and GitHub publication.
 2. Open [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md) and play `urgent_symptoms` or `weekend_closed`.
 3. Open [BUG_REPORT.md](BUG_REPORT.md).
 4. Play BUG-001 and BUG-002 snippets from the linked recordings.
-5. Verify `uv run pytest -q` and `uv run voiceqa validate-submission` still pass.
+5. Verify `uv run pytest -q`, `uv run voiceqa evidence-manifest`, and `uv run voiceqa validate-submission` still pass.
 6. Record Loom walkthrough.
 7. Record AI-debugging walkthrough.
 8. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.

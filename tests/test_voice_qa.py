@@ -11,7 +11,7 @@ from voice_qa.cli import app
 from voice_qa.config import assert_allowed_target, get_secret, secret_status
 from voice_qa.scenarios import load_scenarios
 from voice_qa.simulator import simulate_call
-from voice_qa.submission import FORM_URL, REPOSITORY_URL, validate_campaign, validate_final_readiness
+from voice_qa.submission import FORM_URL, REPOSITORY_URL, validate_campaign, validate_final_readiness, write_evidence_manifest
 
 
 def test_target_guard_accepts_only_assessment_number() -> None:
@@ -148,6 +148,23 @@ def test_transcribe_rejects_secret_output_path(tmp_path: Path, monkeypatch) -> N
     assert "artifacts/" in result.output
 
 
+def test_voiceqa_cli_writes_evidence_manifest(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("PATH", "")
+    _write_submission_fixture(tmp_path, complete_calls=10)
+    (tmp_path / "EVIDENCE_MANIFEST.md").unlink()
+    runner = CliRunner()
+
+    result = runner.invoke(app, ["evidence-manifest"])
+
+    assert result.exit_code == 0, result.output
+    manifest = tmp_path / "EVIDENCE_MANIFEST.md"
+    assert manifest.exists()
+    text = manifest.read_text()
+    assert "| Evidence sets | 16 |" in text
+    assert "MP3 SHA-256" in text
+
+
 def test_submission_validator_accepts_complete_campaign(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     monkeypatch.setenv("PATH", "")
@@ -186,6 +203,18 @@ def test_submission_validator_catches_event_log_sid_mismatch(tmp_path: Path, mon
 
     assert result.ok is False
     assert any("start call_sid does not match" in issue for issue in result.issues)
+
+
+def test_submission_validator_catches_stale_evidence_manifest(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("PATH", "")
+    campaign = _write_submission_fixture(tmp_path, complete_calls=10)
+    (tmp_path / "EVIDENCE_MANIFEST.md").write_text("# stale\n")
+
+    result = validate_campaign(campaign)
+
+    assert result.ok is False
+    assert any("EVIDENCE_MANIFEST.md is stale" in issue for issue in result.issues)
 
 
 def test_submission_validator_catches_missing_events_and_broken_links(tmp_path: Path, monkeypatch) -> None:
@@ -345,6 +374,7 @@ def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
         event_dir = supplemental / "events" / sid
         event_dir.mkdir()
         event_dir.joinpath("events.jsonl").write_text("\n".join(json.dumps(row) for row in _fixture_event_rows(sid)) + "\n")
+    write_evidence_manifest(root=campaign, output=workspace / "EVIDENCE_MANIFEST.md")
     return campaign
 
 

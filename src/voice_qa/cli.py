@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import shutil
 
@@ -22,7 +23,7 @@ from .scenarios import find_scenario, load_scenarios
 from .simulator import simulate_call
 from .twilio_client import build_dial_request, create_outbound_call, download_call_recording
 from .twiml import build_voice_twiml
-from .submission import validate_campaign, validate_final_readiness
+from .submission import validate_campaign, validate_final_readiness, write_evidence_manifest
 
 app = typer.Typer(help="Pretty Good AI voice QA harness.")
 console = Console()
@@ -236,6 +237,19 @@ def validate_submission(
             console.print(f"[red]ISSUE[/red] {issue}")
         raise typer.Exit(code=1)
     console.print("Submission artifact validation passed.")
+
+
+@app.command("evidence-manifest")
+def evidence_manifest(
+    root: Path = typer.Option(Path("artifacts/campaign_20260705"), "--root"),
+    output: Path = typer.Option(Path("EVIDENCE_MANIFEST.md"), "--output", "-o"),
+) -> None:
+    """Write a hash-and-duration manifest for the final evidence package."""
+    try:
+        path = write_evidence_manifest(root=root, output=output)
+    except (ValueError, RuntimeError, FileNotFoundError, json.JSONDecodeError) as exc:
+        raise typer.BadParameter(str(exc)) from exc
+    console.print(f"Wrote evidence manifest: {path}")
 
 
 @app.command("final-check")

@@ -1,6 +1,6 @@
 # Pretty Good AI Voice QA Harness
 
-This repository is a patient-simulation QA harness for the Pretty Good AI engineering challenge. It makes real guarded calls to the assessment line, simulates realistic patient scenarios through OpenAI Realtime, records full calls with Twilio, transcribes recordings with Groq, and packages evidence into a reviewer-friendly call index and bug report.
+This repository is a patient-simulation QA harness for the Pretty Good AI engineering challenge. It makes real guarded calls to the assessment line, simulates realistic patient scenarios through OpenAI Realtime, records call evidence with Twilio, transcribes recordings with Groq, and packages evidence into a reviewer-friendly call index, bug report, and integrity manifest.
 
 Start here:
 
@@ -9,6 +9,7 @@ Start here:
 - Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md)
 - [CALL_INDEX.md](CALL_INDEX.md): reviewer entry point for all campaign calls.
 - [BUG_REPORT.md](BUG_REPORT.md): curated findings with evidence links.
+- [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md): hashes, durations, transcript stats, and event counts for all call evidence.
 - [ARCHITECTURE.md](ARCHITECTURE.md): short architecture explanation.
 - [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md): PDF requirement-to-evidence map.
 - [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md): recommended listening order for the top judging criterion.
@@ -38,6 +39,7 @@ Validated entry points:
 - [artifacts/campaign_20260705/CALL_INDEX.md](artifacts/campaign_20260705/CALL_INDEX.md)
 - [artifacts/campaign_20260705/BUG_REPORT.md](artifacts/campaign_20260705/BUG_REPORT.md)
 - [artifacts/campaign_20260705_clean/CALL_INDEX.md](artifacts/campaign_20260705_clean/CALL_INDEX.md)
+- [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md)
 
 ## Quick Start
 
@@ -49,6 +51,7 @@ export HF_HOME="$PWD/.codex_local_memory/cache/huggingface"
 
 uv sync
 uv run pytest
+uv run voiceqa evidence-manifest
 uv run voiceqa validate-submission
 uv run voiceqa env-check
 uv run voiceqa scenarios

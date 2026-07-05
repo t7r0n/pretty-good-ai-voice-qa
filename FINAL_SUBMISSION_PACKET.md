@@ -16,6 +16,7 @@ Submission form: [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdn
 - Voice quality first-listening guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md)
 - Primary call index: [CALL_INDEX.md](CALL_INDEX.md)
 - Curated bug report: [BUG_REPORT.md](BUG_REPORT.md)
+- Evidence manifest: [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md)
 - Architecture: [ARCHITECTURE.md](ARCHITECTURE.md)
 - Requirement audit: [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md)
 - Validation report: [artifacts/campaign_20260705/VALIDATION_REPORT.md](artifacts/campaign_20260705/VALIDATION_REPORT.md)
@@ -33,13 +34,15 @@ uv run python scripts/apply_video_links.py \
   --debug "$DEBUG_RECORDING_URL"
 ```
 
-5. Run `uv run voiceqa validate-submission`.
-6. Commit and push the link update.
+5. Run `uv run voiceqa evidence-manifest`.
+6. Run `uv run voiceqa validate-submission`.
+7. Commit and push the link update.
 
 ## Final Local Verification
 
 ```bash
 uv run pytest -q
+uv run voiceqa evidence-manifest
 uv run voiceqa validate-submission
 uv build --out-dir artifacts/build_dist
 git status --short

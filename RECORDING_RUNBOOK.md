@@ -15,6 +15,7 @@ export HF_HOME=$PWD/.codex_local_memory/cache/huggingface
 
 ```bash
 uv run pytest -q
+uv run voiceqa evidence-manifest
 uv run voiceqa validate-submission
 uv run voiceqa final-check
 ```
@@ -48,7 +49,7 @@ Target: 5 minutes.
 1. 0:00-0:30: show the public repo and explain the AI-assisted loop: build, run real calls, inspect evidence, patch, retest.
 2. 0:30-1:20: show `src/voice_qa/config.py` and `.env.example`; explain fixing environment aliases such as `twilio_number` without printing `.env`.
 3. 1:20-2:20: show `src/voice_qa/call_server.py`, `src/voice_qa/twiml.py`, and `src/voice_qa/realtime.py`; explain signed webhooks, signed stream tokens, no query-controlled mode override, and Realtime audio bridging.
-4. 2:20-3:20: run or show `uv run pytest -q` and `uv run voiceqa validate-submission`.
+4. 2:20-3:20: run or show `uv run pytest -q`, `uv run voiceqa evidence-manifest`, and `uv run voiceqa validate-submission`.
 5. 3:20-4:15: show `src/voice_qa/submission.py`; explain the stronger evidence validator and `voiceqa final-check`.
 6. 4:15-5:00: show `SUBMISSION_CHECKLIST.md`; explain remaining form submission and video-link application.
 
@@ -59,8 +60,9 @@ uv run python scripts/apply_video_links.py \
   --loom "$LOOM_URL" \
   --debug "$DEBUG_RECORDING_URL"
 
+uv run voiceqa evidence-manifest
 uv run voiceqa final-check
-git add README.md FINAL_SUBMISSION_PACKET.md SUBMISSION_CHECKLIST.md
+git add README.md FINAL_SUBMISSION_PACKET.md SUBMISSION_CHECKLIST.md EVIDENCE_MANIFEST.md
 git commit -m "Add final video links"
 git push
 ```
