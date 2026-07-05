@@ -29,9 +29,9 @@ Status: ready for video recording and GitHub publication.
 - [x] Confirm `.env` is ignored by Git.
 - [x] Confirm `artifacts/campaign_20260705/` is tracked.
 - [x] Confirm `artifacts/campaign_20260705_clean/` is tracked.
-- [ ] Confirm MP3 recordings open from GitHub after final doc push.
-- [ ] Confirm markdown links in `CALL_INDEX.md` and `BUG_REPORT.md` work on GitHub after final doc push.
-- [ ] Confirm top-level `README.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `LOOM.md`, and this checklist are visible at repo root after final doc push.
+- [x] Confirm MP3 recordings open from GitHub.
+- [x] Confirm markdown links in `CALL_INDEX.md` and `BUG_REPORT.md` work on GitHub.
+- [x] Confirm top-level `README.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `LOOM.md`, and this checklist are visible at repo root.
 
 ## Suggested Final Review Order
 
