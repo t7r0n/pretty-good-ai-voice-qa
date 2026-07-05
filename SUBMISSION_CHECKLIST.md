@@ -16,7 +16,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Transcripts: 20 JSON transcripts and 20 timestamped markdown transcripts.
 - [x] Bug report: [BUG_REPORT.md](BUG_REPORT.md).
 - [x] Single allowed assessment target: enforced in code as `+18054398008`.
-- [x] Tests: `47 passed`.
+- [x] Tests: `48 passed`.
 - [x] Submission artifact validator: `uv run voiceqa validate-submission` passes.
 - [x] Validation report: [artifacts/campaign_20260705/VALIDATION_REPORT.md](artifacts/campaign_20260705/VALIDATION_REPORT.md).
 - [ ] Loom walkthrough link.
@@ -43,4 +43,5 @@ Status: ready for video recording and GitHub publication.
 5. Verify `uv run pytest -q` and `uv run voiceqa validate-submission` still pass.
 6. Record Loom walkthrough.
 7. Record AI-debugging walkthrough.
-8. Publish repository and submit form.
+8. Apply video links with `uv run python scripts/apply_video_links.py --loom <url> --debug <url>`.
+9. Commit, push, and submit the form.

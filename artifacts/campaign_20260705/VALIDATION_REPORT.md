@@ -4,7 +4,7 @@ Date: 2026-07-05
 
 ## Automated Gates
 
-- `uv run pytest -q`: passed, 47 tests.
+- `uv run pytest -q`: passed, 48 tests.
 - `uv run voiceqa validate-submission`: passed, including supplemental cleanup evidence.
 - `uv run python -m compileall -q src tests`: passed.
 - `uv build --out-dir artifacts/build_dist`: passed.
