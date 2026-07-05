@@ -9,6 +9,7 @@ Status: ready for video recording and GitHub publication.
 - [x] `.env.example` documenting environment variables.
 - [x] Architecture doc: [ARCHITECTURE.md](ARCHITECTURE.md).
 - [x] Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md).
+- [x] Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md).
 - [x] PDF requirement audit: [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md).
 - [x] Voice quality review guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md).
 - [x] Minimum 10 full calls: 20 completed real calls across [artifacts/campaign_20260705/CALL_INDEX.md](artifacts/campaign_20260705/CALL_INDEX.md) and [artifacts/campaign_20260705_clean/CALL_INDEX.md](artifacts/campaign_20260705_clean/CALL_INDEX.md).
@@ -43,5 +44,6 @@ Status: ready for video recording and GitHub publication.
 5. Verify `uv run pytest -q` and `uv run voiceqa validate-submission` still pass.
 6. Record Loom walkthrough.
 7. Record AI-debugging walkthrough.
-8. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
-9. Commit, push, and submit the form.
+8. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.
+9. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
+10. Commit, push, and submit the form.

@@ -250,6 +250,7 @@ def test_final_readiness_passes_with_video_links(tmp_path: Path, monkeypatch) ->
 def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
     for name in [
         "ARCHITECTURE.md",
+        "RECORDING_RUNBOOK.md",
         "REQUIREMENTS_AUDIT.md",
         "VOICE_QUALITY_REVIEW.md",
         "CALL_INDEX.md",

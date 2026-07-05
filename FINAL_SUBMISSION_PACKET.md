@@ -24,7 +24,8 @@ Submission form: [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdn
 
 1. Record the Loom walkthrough using [LOOM.md](LOOM.md).
 2. Record the AI-debugging screen capture using [AI_DEBUGGING_RECORDING.md](AI_DEBUGGING_RECORDING.md).
-3. Add both public video links:
+3. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) as the exact shot list and secret-safety checklist.
+4. Add both public video links:
 
 ```bash
 uv run python scripts/apply_video_links.py \
@@ -32,8 +33,8 @@ uv run python scripts/apply_video_links.py \
   --debug "$DEBUG_RECORDING_URL"
 ```
 
-4. Run `uv run voiceqa validate-submission`.
-5. Commit and push the link update.
+5. Run `uv run voiceqa validate-submission`.
+6. Commit and push the link update.
 
 ## Final Local Verification
 
