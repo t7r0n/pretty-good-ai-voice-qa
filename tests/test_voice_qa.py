@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 from typer.testing import CliRunner
@@ -157,6 +158,34 @@ def test_submission_validator_accepts_complete_campaign(tmp_path: Path, monkeypa
     assert result.ok is True
     assert result.issues == []
     assert result.summary["complete_call_sets"] == 10
+    assert result.summary["supplemental_complete_call_sets"] == 6
+
+
+def test_submission_validator_requires_supplemental_cleanup_campaign(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("PATH", "")
+    campaign = _write_submission_fixture(tmp_path, complete_calls=10)
+    shutil.rmtree(tmp_path / "artifacts" / "campaign_20260705_clean")
+
+    result = validate_campaign(campaign)
+
+    assert result.ok is False
+    assert any("Missing supplemental cleanup campaign" in issue for issue in result.issues)
+
+
+def test_submission_validator_catches_event_log_sid_mismatch(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("PATH", "")
+    campaign = _write_submission_fixture(tmp_path, complete_calls=10)
+    sid = "CA000000000000000000000000000000000"
+    rows = _fixture_event_rows(sid)
+    rows[0]["call_sid"] = "CA999999999999999999999999999999999"
+    (campaign / "events" / sid / "events.jsonl").write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+
+    result = validate_campaign(campaign)
+
+    assert result.ok is False
+    assert any("start call_sid does not match" in issue for issue in result.issues)
 
 
 def test_submission_validator_catches_missing_events_and_broken_links(tmp_path: Path, monkeypatch) -> None:
@@ -171,8 +200,8 @@ def test_submission_validator_catches_missing_events_and_broken_links(tmp_path: 
     result = validate_campaign(campaign)
 
     assert result.ok is False
-    assert any("missing media" in issue for issue in result.issues)
-    assert any("missing openai_outbound" in issue for issue in result.issues)
+    assert any("too few Twilio media frames" in issue for issue in result.issues)
+    assert any("missing OpenAI outbound audio" in issue for issue in result.issues)
     assert any("Broken link" in issue for issue in result.issues)
 
 
@@ -300,15 +329,28 @@ def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
         (campaign / "transcripts_md" / f"{sid}_fixture.md").write_text("[000.00-001.00] fixture transcript\n")
         event_dir = campaign / "events" / sid
         event_dir.mkdir()
-        event_dir.joinpath("events.jsonl").write_text(
-            "\n".join(
-                [
-                    json.dumps({"event": "start"}),
-                    json.dumps({"event": "media"}),
-                    json.dumps({"event": "openai_outbound"}),
-                    json.dumps({"event": "stop"}),
-                ]
-            )
-            + "\n"
+        event_dir.joinpath("events.jsonl").write_text("\n".join(json.dumps(row) for row in _fixture_event_rows(sid)) + "\n")
+
+    supplemental = workspace / "artifacts" / "campaign_20260705_clean"
+    for subdir in ["recordings", "transcripts", "transcripts_md", "events"]:
+        (supplemental / subdir).mkdir(parents=True, exist_ok=True)
+    (supplemental / "CALL_INDEX.md").write_text("[call](transcripts_md/CA900000000000000000000000000000000_fixture.md)\n")
+    for index in range(6):
+        sid = f"CA9{index:032d}"
+        (supplemental / "recordings" / f"{sid}_REfixture.mp3").write_bytes(b"\xff\xf3" + (b"\x00" * 150_000))
+        (supplemental / "transcripts" / f"{sid}_fixture.json").write_text(
+            json.dumps({"duration": 60.0, "text": "supplemental transcript evidence " * 20})
         )
+        (supplemental / "transcripts_md" / f"{sid}_fixture.md").write_text("[000.00-001.00] fixture transcript\n")
+        event_dir = supplemental / "events" / sid
+        event_dir.mkdir()
+        event_dir.joinpath("events.jsonl").write_text("\n".join(json.dumps(row) for row in _fixture_event_rows(sid)) + "\n")
     return campaign
+
+
+def _fixture_event_rows(sid: str) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = [{"event": "start", "call_sid": sid, "ts": 0.0}]
+    rows.extend({"event": "media", "chunk": str(index), "ts": 0.1 + index} for index in range(12))
+    rows.append({"event": "openai_outbound", "ts": 20.0})
+    rows.append({"event": "stop", "ts": 21.0})
+    return rows

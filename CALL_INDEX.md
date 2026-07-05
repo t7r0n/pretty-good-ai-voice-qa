@@ -6,11 +6,12 @@ Supplemental clean-run index: [artifacts/campaign_20260705_clean/CALL_INDEX.md](
 
 Summary:
 
-- 20 real outbound calls were completed: 14 primary campaign calls plus 6 supplemental cleanup reruns.
+- 20 real outbound call evidence sets were captured: 14 primary campaign calls plus 6 supplemental cleanup reruns.
 - 20 MP3 recordings were downloaded from Twilio.
 - 20 Groq post-call transcripts were generated.
 - 20 local event logs contain Twilio media and OpenAI outbound activity.
 - All calls used the single allowed target number `+18054398008`.
+- Two supplemental long-limit calls reached the 180-second cap and are retained as stress evidence, not first-listening recommendations.
 
 Recommended reviewer path:
 

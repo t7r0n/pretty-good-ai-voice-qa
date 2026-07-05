@@ -12,7 +12,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md).
 - [x] PDF requirement audit: [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md).
 - [x] Voice quality review guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md).
-- [x] Minimum 10 full calls: 20 completed real calls across [artifacts/campaign_20260705/CALL_INDEX.md](artifacts/campaign_20260705/CALL_INDEX.md) and [artifacts/campaign_20260705_clean/CALL_INDEX.md](artifacts/campaign_20260705_clean/CALL_INDEX.md).
+- [x] Minimum 10 real call evidence sets: 20 captured calls with MP3 recordings, Groq transcripts, timestamped markdown, and event logs across [artifacts/campaign_20260705/CALL_INDEX.md](artifacts/campaign_20260705/CALL_INDEX.md) and [artifacts/campaign_20260705_clean/CALL_INDEX.md](artifacts/campaign_20260705_clean/CALL_INDEX.md).
 - [x] MP3 recordings: 20 files across the primary and supplemental campaign directories.
 - [x] Transcripts: 20 JSON transcripts and 20 timestamped markdown transcripts.
 - [x] Bug report: [BUG_REPORT.md](BUG_REPORT.md).

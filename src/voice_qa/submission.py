@@ -73,7 +73,7 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
         if duration is not None:
             recording_durations[sid] = duration
             if duration < 45:
-                issues.append(f"Recording duration too short for full call: {recording} ({duration:.1f}s).")
+                issues.append(f"Recording duration too short for usable call evidence: {recording} ({duration:.1f}s).")
 
     for transcript in transcripts_json:
         try:
@@ -84,7 +84,7 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
         duration = float(data.get("duration") or 0)
         text = data.get("text") or ""
         if duration < 45:
-            issues.append(f"Transcript duration too short for full call: {transcript} ({duration:.1f}s).")
+            issues.append(f"Transcript duration too short for usable call evidence: {transcript} ({duration:.1f}s).")
         if len(text) < 250:
             issues.append(f"Transcript text too short: {transcript}.")
         recording_duration = recording_durations.get(_sid_from_name(transcript.name))
@@ -99,11 +99,7 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
             issues.append(f"Timestamped transcript markdown has no timestamp lines: {markdown}")
 
     for event_log in event_logs:
-        rows = [json.loads(line) for line in event_log.read_text().splitlines() if line.strip()]
-        counts = Counter(row.get("event") for row in rows)
-        for event in ("start", "media", "openai_outbound", "stop"):
-            if counts[event] <= 0:
-                issues.append(f"Event log missing {event}: {event_log}")
+        issues.extend(_event_log_issues(event_log, expected_sid=event_log.parent.name))
 
     markdowns_to_check = [
         root / "CALL_INDEX.md",
@@ -126,7 +122,9 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
 
     supplemental_root = Path("artifacts/campaign_20260705_clean").resolve()
     supplemental_complete_sets = 0
-    if supplemental_root.exists():
+    if not supplemental_root.exists():
+        issues.append(f"Missing supplemental cleanup campaign directory: {supplemental_root}")
+    else:
         supplemental_index = supplemental_root / "CALL_INDEX.md"
         if not supplemental_index.exists():
             issues.append(f"Missing supplemental call index: {supplemental_index}")
@@ -176,11 +174,7 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
             if not re.search(r"^\[\d{3}\.\d{2}-\d{3}\.\d{2}\]", markdown.read_text(), re.MULTILINE):
                 issues.append(f"Supplemental timestamped transcript markdown has no timestamp lines: {markdown}")
         for event_log in supplemental_events:
-            rows = [json.loads(line) for line in event_log.read_text().splitlines() if line.strip()]
-            counts = Counter(row.get("event") for row in rows)
-            for event in ("start", "media", "openai_outbound", "stop"):
-                if counts[event] <= 0:
-                    issues.append(f"Supplemental event log missing {event}: {event_log}")
+            issues.extend(_event_log_issues(event_log, expected_sid=event_log.parent.name, label="Supplemental "))
 
     summary = {
         "recordings": len(recordings),
@@ -314,3 +308,46 @@ def _extract_line_url(text: str, prefix: str) -> str | None:
             return None
         return url
     return None
+
+
+def _event_log_issues(path: Path, *, expected_sid: str, label: str = "") -> list[str]:
+    issues: list[str] = []
+    rows: list[dict[str, object]] = []
+    for line_number, line in enumerate(path.read_text().splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as exc:
+            issues.append(f"{label}Event log has invalid JSON at {path}:{line_number}: {exc}")
+            continue
+        if not isinstance(row, dict):
+            issues.append(f"{label}Event log row is not an object at {path}:{line_number}")
+            continue
+        rows.append(row)
+
+    if not rows:
+        return [f"{label}Event log is empty: {path}"]
+
+    counts = Counter(row.get("event") for row in rows)
+    if counts["start"] != 1:
+        issues.append(f"{label}Event log should contain exactly one start event: {path} ({counts['start']}).")
+    if counts["stop"] != 1:
+        issues.append(f"{label}Event log should contain exactly one stop event: {path} ({counts['stop']}).")
+    if counts["media"] < 10:
+        issues.append(f"{label}Event log has too few Twilio media frames: {path} ({counts['media']}).")
+    if counts["openai_outbound"] <= 0:
+        issues.append(f"{label}Event log missing OpenAI outbound audio: {path}")
+
+    start_rows = [row for row in rows if row.get("event") == "start"]
+    if start_rows and start_rows[0].get("call_sid") != expected_sid:
+        issues.append(
+            f"{label}Event log start call_sid does not match directory: {path} "
+            f"({start_rows[0].get('call_sid')} vs {expected_sid})."
+        )
+
+    timestamps = [row.get("ts") for row in rows if isinstance(row.get("ts"), int | float)]
+    if any(current < previous for previous, current in zip(timestamps, timestamps[1:])):
+        issues.append(f"{label}Event log timestamps are not monotonic: {path}")
+
+    return issues
