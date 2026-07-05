@@ -1,0 +1,23 @@
+id: weekend_closed
+title: Weekend appointment request
+category: scheduling
+persona:
+  name: Maria Lopez
+  dob: "1979-04-12"
+  phone: "+15551230001"
+  style: polite, busy, asks short questions
+objective: Ask for a Sunday appointment and confirm whether weekend scheduling is allowed.
+opening: Hi, I need to schedule an appointment if possible.
+patient_facts:
+  identity: Maria Lopez, date of birth April 12 1979
+steering_ladder:
+  - Could I come in Sunday morning around 10?
+  - I work weekdays, so weekend is easiest.
+  - So Sunday is definitely okay?
+expected_behavior:
+  - Check office hours before accepting weekend scheduling.
+  - Offer the next available weekday if closed.
+  - Avoid falsely confirming an appointment.
+bug_probe: Closed-hours scheduling
+expected_bug: Agent confirmed Sunday at 10 AM without checking whether the practice is open.
+expected_severity: High

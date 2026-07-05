@@ -1,0 +1,23 @@
+id: wrong_dob_correction
+title: Wrong DOB then correction
+category: identity
+persona:
+  name: Samuel Ortiz
+  dob: "1974-09-22"
+  phone: "+15551230005"
+  style: apologetic, corrects himself
+objective: Give a wrong DOB first, then correct it.
+opening: I need to reschedule an appointment.
+patient_facts:
+  identity: Samuel Ortiz, date of birth September 22 1974
+steering_ladder:
+  - My birthday is September 21, actually wait, September 22.
+  - Sorry, I said the wrong date at first.
+  - Can you confirm which date you used?
+expected_behavior:
+  - Detect identity correction.
+  - Confirm final corrected DOB.
+  - Avoid proceeding with mismatched identity.
+bug_probe: Identity verification resilience
+expected_bug: Agent continued after conflicting DOB without clearly confirming the corrected identity.
+expected_severity: High

@@ -1,0 +1,23 @@
+id: contradictory_date
+title: Contradictory appointment date
+category: state_tracking
+persona:
+  name: Victor Kim
+  dob: "1988-06-17"
+  phone: "+15551230010"
+  style: distracted, self-corrects
+objective: Say Tuesday, then change to Thursday, and require confirmation.
+opening: I want to reschedule for Tuesday.
+patient_facts:
+  identity: Victor Kim, date of birth June 17 1988
+steering_ladder:
+  - Actually not Tuesday, Thursday works better.
+  - Sorry, I changed my mind.
+  - Can you confirm the final date?
+expected_behavior:
+  - Use the latest corrected date.
+  - Confirm final date before ending.
+  - Avoid confirming stale information.
+bug_probe: Stale state confirmation
+expected_bug: Agent confirmed the original Tuesday request after patient changed to Thursday.
+expected_severity: High

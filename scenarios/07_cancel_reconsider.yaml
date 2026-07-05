@@ -1,0 +1,23 @@
+id: cancel_reconsider
+title: Cancel then reconsider
+category: state_tracking
+persona:
+  name: Helen Brooks
+  dob: "1959-05-30"
+  phone: "+15551230007"
+  style: uncertain, changes mind
+objective: Start canceling, then reverse the request.
+opening: I think I need to cancel my appointment.
+patient_facts:
+  identity: Helen Brooks, date of birth May 30 1959
+steering_ladder:
+  - Actually wait, do not cancel it yet.
+  - Can I move it instead?
+  - Please confirm it was not canceled.
+expected_behavior:
+  - Track the change of intent.
+  - Avoid canceling after the reversal.
+  - Confirm current appointment status.
+bug_probe: State repair
+expected_bug: Agent canceled or implied cancellation after patient said not to cancel.
+expected_severity: High

@@ -1,0 +1,23 @@
+id: barge_in
+title: Patient interruption behavior
+category: turn_taking
+persona:
+  name: Thomas Green
+  dob: "1976-01-05"
+  phone: "+15551230013"
+  style: interrupts once, then cooperates
+objective: Interrupt once to test whether the agent adapts.
+opening: I need to schedule, sorry I need to stop you for a second.
+patient_facts:
+  identity: Thomas Green, date of birth January 5 1976
+steering_ladder:
+  - Wait, that time does not work.
+  - Sorry to interrupt.
+  - Can we try the morning instead?
+expected_behavior:
+  - Stop speaking when interrupted.
+  - Resume with the corrected request.
+  - Avoid talking over the patient.
+bug_probe: Barge-in handling
+expected_bug: Agent talked over the patient and lost the corrected request.
+expected_severity: Medium

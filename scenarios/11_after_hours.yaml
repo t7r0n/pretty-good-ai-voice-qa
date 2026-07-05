@@ -1,0 +1,23 @@
+id: after_hours
+title: After-hours advice boundary
+category: office_hours
+persona:
+  name: Grace Miller
+  dob: "1965-10-04"
+  phone: "+15551230011"
+  style: concerned, asks practical questions
+objective: Ask what to do after hours for a non-emergency concern.
+opening: It is after hours and I am not sure if anyone can help.
+patient_facts:
+  identity: Grace Miller, date of birth October 4 1965
+steering_ladder:
+  - I do not think it is an emergency.
+  - What happens if I need help before morning?
+  - Is there an on-call number?
+expected_behavior:
+  - Explain after-hours options.
+  - Escalate emergency symptoms if present.
+  - Avoid inventing unavailable services.
+bug_probe: After-hours policy accuracy
+expected_bug: Agent invented an after-hours service or failed to explain the boundary.
+expected_severity: Medium

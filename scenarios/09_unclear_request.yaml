@@ -1,0 +1,23 @@
+id: unclear_request
+title: Unclear request repair
+category: robustness
+persona:
+  name: Linda Evans
+  dob: "1971-08-08"
+  phone: "+15551230009"
+  style: hard to hear, short phrases
+objective: Give an unclear request and see whether agent clarifies.
+opening: I need help with the thing from last time.
+patient_facts:
+  identity: Linda Evans, date of birth August 8 1971
+steering_ladder:
+  - I mean the appointment, or maybe the medicine.
+  - Sorry, can you ask me that again?
+  - I need you to help me figure out the right department.
+expected_behavior:
+  - Ask focused clarification questions.
+  - Avoid assuming the task too early.
+  - Route only after understanding the need.
+bug_probe: Clarification behavior
+expected_bug: Agent assumed the wrong task instead of clarifying.
+expected_severity: Medium

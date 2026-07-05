@@ -1,0 +1,23 @@
+id: location_confusion
+title: Multi-location confusion
+category: scheduling
+persona:
+  name: Denise Park
+  dob: "1982-12-01"
+  phone: "+15551230006"
+  style: direct, location-sensitive
+objective: Request downtown location, reject north office.
+opening: I need an appointment, but only at the downtown office.
+patient_facts:
+  identity: Denise Park, date of birth December 1 1982
+steering_ladder:
+  - North office does not work for me.
+  - Can you confirm this is downtown?
+  - I do not want the other location.
+expected_behavior:
+  - Disambiguate location.
+  - Confirm location before finalizing.
+  - Avoid mixing office hours or availability.
+bug_probe: Wrong location confirmation
+expected_bug: Agent failed to confirm the requested downtown location before finalizing.
+expected_severity: High

@@ -1,0 +1,23 @@
+id: human_handoff
+title: Human handoff request
+category: escalation
+persona:
+  name: Omar Williams
+  dob: "1993-01-14"
+  phone: "+15551230008"
+  style: frustrated but respectful
+objective: Ask for a human after one failed clarification.
+opening: I have a complicated billing and appointment issue.
+patient_facts:
+  identity: Omar Williams, date of birth January 14 1993
+steering_ladder:
+  - That is not what I meant.
+  - Can I talk to a person?
+  - Please transfer me or tell me how to reach staff.
+expected_behavior:
+  - Recognize human request.
+  - Provide transfer or callback path.
+  - Avoid looping through the same question.
+bug_probe: Escalation loop
+expected_bug: Agent ignored request for a human and kept looping.
+expected_severity: Medium

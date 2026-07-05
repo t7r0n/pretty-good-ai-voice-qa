@@ -1,0 +1,23 @@
+id: baseline_scheduling
+title: Baseline appointment scheduling
+category: scheduling
+persona:
+  name: Alice Morgan
+  dob: "1980-02-02"
+  phone: "+15551230014"
+  style: straightforward, cooperative
+objective: Schedule a normal appointment with no trick.
+opening: Hi, I would like to schedule a regular appointment.
+patient_facts:
+  identity: Alice Morgan, date of birth February 2 1980
+steering_ladder:
+  - Next week would be good.
+  - Morning is better if available.
+  - Can you tell me what details you need?
+expected_behavior:
+  - Collect identity and scheduling preferences.
+  - Ask clarifying questions naturally.
+  - Confirm next step without false certainty.
+bug_probe: Baseline quality
+expected_bug:
+expected_severity: None
