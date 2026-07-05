@@ -28,8 +28,8 @@ Submission form: [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdn
 
 ```bash
 uv run python scripts/apply_video_links.py \
-  --loom https://your-loom-url \
-  --debug https://your-debug-recording-url
+  --loom "$LOOM_URL" \
+  --debug "$DEBUG_RECORDING_URL"
 ```
 
 4. Run `uv run voiceqa validate-submission`.

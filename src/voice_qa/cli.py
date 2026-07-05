@@ -22,7 +22,7 @@ from .scenarios import find_scenario, load_scenarios
 from .simulator import simulate_call
 from .twilio_client import build_dial_request, create_outbound_call, download_call_recording
 from .twiml import build_voice_twiml
-from .submission import validate_campaign
+from .submission import validate_campaign, validate_final_readiness
 
 app = typer.Typer(help="Pretty Good AI voice QA harness.")
 console = Console()
@@ -236,6 +236,23 @@ def validate_submission(
             console.print(f"[red]ISSUE[/red] {issue}")
         raise typer.Exit(code=1)
     console.print("Submission artifact validation passed.")
+
+
+@app.command("final-check")
+def final_check(
+    root: Path = typer.Option(Path("artifacts/campaign_20260705"), "--root"),
+) -> None:
+    """Validate artifact package plus final external submission links."""
+    result = validate_final_readiness(root)
+    table = Table("Metric", "Count")
+    for key, value in result.summary.items():
+        table.add_row(key, str(value))
+    console.print(table)
+    if result.issues:
+        for issue in result.issues:
+            console.print(f"[red]ISSUE[/red] {issue}")
+        raise typer.Exit(code=1)
+    console.print("Final submission readiness check passed.")
 
 
 if __name__ == "__main__":

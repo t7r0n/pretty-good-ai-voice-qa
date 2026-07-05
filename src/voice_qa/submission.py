@@ -16,6 +16,10 @@ class SubmissionValidation:
     summary: dict[str, int]
 
 
+FORM_URL = "https://forms.gle/sdnbrJX2XbgZeQaY6"
+REPOSITORY_URL = "https://github.com/t7r0n/pretty-good-ai-voice-qa"
+
+
 def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> SubmissionValidation:
     issues: list[str] = []
     root = root.resolve()
@@ -188,6 +192,59 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
     return SubmissionValidation(ok=not issues, issues=issues, summary=summary)
 
 
+def validate_final_readiness(root: Path = Path("artifacts/campaign_20260705")) -> SubmissionValidation:
+    campaign = validate_campaign(root)
+    issues = list(campaign.issues)
+
+    packet = Path("FINAL_SUBMISSION_PACKET.md")
+    checklist = Path("SUBMISSION_CHECKLIST.md")
+    readme = Path("README.md")
+    for path in (packet, checklist, readme):
+        if not path.exists():
+            issues.append(f"Missing final readiness file: {path}")
+
+    packet_text = packet.read_text() if packet.exists() else ""
+    checklist_text = checklist.read_text() if checklist.exists() else ""
+    readme_text = readme.read_text() if readme.exists() else ""
+
+    loom_url = _extract_line_url(packet_text, "Loom walkthrough link:")
+    debug_url = _extract_line_url(packet_text, "AI-debugging screen recording link:")
+    if not loom_url:
+        issues.append("Missing final Loom walkthrough URL in FINAL_SUBMISSION_PACKET.md.")
+    if not debug_url:
+        issues.append("Missing final AI-debugging screen recording URL in FINAL_SUBMISSION_PACKET.md.")
+    if loom_url and f"- [x] Loom walkthrough link: {loom_url}." not in checklist_text:
+        issues.append("SUBMISSION_CHECKLIST.md does not mark the Loom link complete with the packet URL.")
+    if debug_url and f"- [x] 5-minute AI-debugging screen recording link: {debug_url}." not in checklist_text:
+        issues.append("SUBMISSION_CHECKLIST.md does not mark the AI-debugging recording link complete with the packet URL.")
+    if loom_url and f"- Loom walkthrough: {loom_url}" not in readme_text:
+        issues.append("README.md does not include the final Loom walkthrough URL.")
+    if debug_url and f"- AI-debugging screen recording: {debug_url}" not in readme_text:
+        issues.append("README.md does not include the final AI-debugging recording URL.")
+
+    for label, text in (("FINAL_SUBMISSION_PACKET.md", packet_text), ("SUBMISSION_CHECKLIST.md", checklist_text)):
+        if FORM_URL not in text:
+            issues.append(f"{label} is missing the official submission form URL.")
+        if REPOSITORY_URL not in text:
+            issues.append(f"{label} is missing the public GitHub repository URL.")
+
+    placeholders = ["add after recording", "https://your-loom-url", "https://your-debug-recording-url"]
+    for label, text in (
+        ("FINAL_SUBMISSION_PACKET.md", packet_text),
+        ("SUBMISSION_CHECKLIST.md", checklist_text),
+        ("README.md", readme_text),
+    ):
+        for placeholder in placeholders:
+            if placeholder in text:
+                issues.append(f"{label} still contains placeholder text: {placeholder}")
+
+    summary = dict(campaign.summary)
+    summary["loom_link_present"] = int(bool(loom_url))
+    summary["debug_recording_link_present"] = int(bool(debug_url))
+    summary["final_ready"] = int(not issues)
+    return SubmissionValidation(ok=not issues, issues=issues, summary=summary)
+
+
 def _sid_from_name(name: str) -> str:
     return name.split("_", 1)[0]
 
@@ -241,3 +298,17 @@ def _broken_links(markdown: Path) -> list[str]:
         if not (markdown.parent / target).exists():
             broken.append(f"Broken link in {markdown}: {target}")
     return broken
+
+
+def _extract_line_url(text: str, prefix: str) -> str | None:
+    for line in text.splitlines():
+        if prefix not in line:
+            continue
+        match = re.search(r"https://\S+", line)
+        if not match:
+            return None
+        url = match.group(0).rstrip(".,)")
+        if "your-" in url:
+            return None
+        return url
+    return None
