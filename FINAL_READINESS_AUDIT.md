@@ -56,7 +56,7 @@ Expected pre-video state:
 uv run voiceqa final-check
 ```
 
-`final-check` must fail only for the missing Loom URL, missing AI-debugging URL, and placeholder text that will be removed by `scripts/apply_video_links.py`.
+`final-check` must fail only for the missing Loom URL, missing AI-debugging URL, and placeholder text in the final packet/form artifacts that will be removed by `scripts/apply_video_links.py`.
 
 ## Finalization Sequence
 

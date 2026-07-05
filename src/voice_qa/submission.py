@@ -311,9 +311,16 @@ def validate_final_readiness(root: Path = Path("artifacts/campaign_20260705")) -
         if REPOSITORY_URL not in text:
             issues.append(f"{label} is missing the public GitHub repository URL.")
 
-    placeholders = ["add after recording", "https://your-loom-url", "https://your-debug-recording-url"]
+    placeholders = [
+        "add after recording",
+        "https://your-loom-url",
+        "https://your-debug-recording-url",
+        "Pending Loom walkthrough URL",
+        "Pending AI-debugging screen recording URL",
+    ]
     for label, text in (
         ("FINAL_SUBMISSION_PACKET.md", packet_text),
+        ("FORM_ANSWERS.md", form_answers_text),
         ("SUBMISSION_CHECKLIST.md", checklist_text),
         ("README.md", readme_text),
     ):

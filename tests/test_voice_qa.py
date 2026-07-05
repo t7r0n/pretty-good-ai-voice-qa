@@ -260,6 +260,11 @@ def test_final_readiness_fails_until_video_links_are_present(tmp_path: Path, mon
     assert result.ok is False
     assert any("Missing final Loom" in issue for issue in result.issues)
     assert any("Missing final AI-debugging" in issue for issue in result.issues)
+    assert any("FORM_ANSWERS.md still contains placeholder text: Pending Loom" in issue for issue in result.issues)
+    assert any(
+        "FORM_ANSWERS.md still contains placeholder text: Pending AI-debugging" in issue
+        for issue in result.issues
+    )
 
 
 def test_final_readiness_passes_with_video_links(tmp_path: Path, monkeypatch) -> None:

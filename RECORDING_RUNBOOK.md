@@ -20,7 +20,7 @@ uv run voiceqa validate-submission
 uv run voiceqa final-check
 ```
 
-Expected before video links are applied: `final-check` should fail only because the Loom and AI-debugging URLs are missing and their placeholder text is still present. Do not show `.env` or print secret values.
+Expected before video links are applied: `final-check` should fail only because the Loom and AI-debugging URLs are missing and placeholder text is still present in the final packet/form artifacts. Do not show `.env` or print secret values.
 
 Open these files in tabs before starting:
 
