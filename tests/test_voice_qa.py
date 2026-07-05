@@ -193,6 +193,7 @@ def test_submission_validator_catches_fake_recordings_without_ffprobe(tmp_path: 
 def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
     for name in [
         "README.md",
+        "FINAL_SUBMISSION_PACKET.md",
         "ARCHITECTURE.md",
         "REQUIREMENTS_AUDIT.md",
         "VOICE_QUALITY_REVIEW.md",

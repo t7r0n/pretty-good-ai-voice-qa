@@ -8,6 +8,7 @@ Status: ready for video recording and GitHub publication.
 - [x] README with setup and run instructions.
 - [x] `.env.example` documenting environment variables.
 - [x] Architecture doc: [ARCHITECTURE.md](ARCHITECTURE.md).
+- [x] Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md).
 - [x] PDF requirement audit: [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md).
 - [x] Voice quality review guide: [VOICE_QUALITY_REVIEW.md](VOICE_QUALITY_REVIEW.md).
 - [x] Minimum 10 full calls: 20 completed real calls across [artifacts/campaign_20260705/CALL_INDEX.md](artifacts/campaign_20260705/CALL_INDEX.md) and [artifacts/campaign_20260705_clean/CALL_INDEX.md](artifacts/campaign_20260705_clean/CALL_INDEX.md).
@@ -21,7 +22,7 @@ Status: ready for video recording and GitHub publication.
 - [ ] Loom walkthrough link.
 - [ ] 5-minute AI-debugging screen recording link.
 - [x] Public GitHub repository link: [t7r0n/pretty-good-ai-voice-qa](https://github.com/t7r0n/pretty-good-ai-voice-qa).
-- [ ] Submission form filled with the one Twilio caller number used, in E.164 format.
+- [ ] Submission form filled at [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6) with the one Twilio caller number used, in E.164 format.
 
 ## Before Publishing GitHub
 
@@ -31,7 +32,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Confirm `artifacts/campaign_20260705_clean/` is tracked.
 - [x] Confirm MP3 recordings open from GitHub.
 - [x] Confirm markdown links in `CALL_INDEX.md` and `BUG_REPORT.md` work on GitHub.
-- [x] Confirm top-level `README.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `LOOM.md`, and this checklist are visible at repo root.
+- [x] Confirm top-level `README.md`, `FINAL_SUBMISSION_PACKET.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `LOOM.md`, and this checklist are visible at repo root.
 
 ## Suggested Final Review Order
 

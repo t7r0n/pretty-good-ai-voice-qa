@@ -17,9 +17,11 @@ Status: local artifact package is ready for video recording and GitHub publicati
 | Bug report | `artifacts/campaign_20260705/BUG_REPORT.md` and top-level `BUG_REPORT.md` | Ready |
 | Loom walkthrough, max 5 minutes | `LOOM.md` script exists; link still needs to be recorded and added | External step |
 | AI-debugging screen recording, 5 minutes | `AI_DEBUGGING_RECORDING.md` script exists; link still needs to be recorded and added | External step |
-| Public GitHub repository | Local package is prepared; repository still needs to be published | External step |
+| Public GitHub repository | [https://github.com/t7r0n/pretty-good-ai-voice-qa](https://github.com/t7r0n/pretty-good-ai-voice-qa) | Ready |
 | Single caller phone number in E.164 format | Calls were made from one configured Twilio caller number; submit that exact number in the form | External step |
 | Do not commit secrets | `.env` is ignored; `.env.example` documents required variables | Ready |
+
+Submission form: [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6)
 
 ## Evaluation Criteria Mapping
 
