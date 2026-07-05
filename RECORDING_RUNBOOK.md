@@ -25,6 +25,7 @@ Expected before video links are applied: `final-check` should fail only because 
 Open these files in tabs before starting:
 
 - `README.md`
+- `FORM_ANSWERS.md`
 - `VOICE_QUALITY_REVIEW.md`
 - `BUG_REPORT.md`
 - `ARCHITECTURE.md`
@@ -62,9 +63,9 @@ uv run python scripts/apply_video_links.py \
 
 uv run voiceqa evidence-manifest
 uv run voiceqa final-check
-git add README.md FINAL_SUBMISSION_PACKET.md SUBMISSION_CHECKLIST.md EVIDENCE_MANIFEST.md
+git add README.md FINAL_SUBMISSION_PACKET.md FORM_ANSWERS.md SUBMISSION_CHECKLIST.md EVIDENCE_MANIFEST.md
 git commit -m "Add final video links"
 git push
 ```
 
-Then submit the form at [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6) using the single Twilio caller number from local `.env` in E.164 format.
+Then submit the form at [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6) using [FORM_ANSWERS.md](FORM_ANSWERS.md) and the single Twilio caller number from local `.env` in E.164 format.

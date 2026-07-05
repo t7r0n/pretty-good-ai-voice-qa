@@ -31,6 +31,7 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
         Path("README.md").resolve(),
         Path("REVIEWER_BRIEF.md").resolve(),
         Path("FINAL_SUBMISSION_PACKET.md").resolve(),
+        Path("FORM_ANSWERS.md").resolve(),
         Path("RECORDING_RUNBOOK.md").resolve(),
         Path("ARCHITECTURE.md").resolve(),
         Path("REQUIREMENTS_AUDIT.md").resolve(),
@@ -110,6 +111,7 @@ def validate_campaign(root: Path = Path("artifacts/campaign_20260705")) -> Submi
         Path("README.md"),
         Path("REVIEWER_BRIEF.md"),
         Path("FINAL_SUBMISSION_PACKET.md"),
+        Path("FORM_ANSWERS.md"),
         Path("RECORDING_RUNBOOK.md"),
         Path("ARCHITECTURE.md"),
         Path("REQUIREMENTS_AUDIT.md"),
@@ -268,13 +270,15 @@ def validate_final_readiness(root: Path = Path("artifacts/campaign_20260705")) -
     packet = Path("FINAL_SUBMISSION_PACKET.md")
     checklist = Path("SUBMISSION_CHECKLIST.md")
     readme = Path("README.md")
-    for path in (packet, checklist, readme):
+    form_answers = Path("FORM_ANSWERS.md")
+    for path in (packet, checklist, readme, form_answers):
         if not path.exists():
             issues.append(f"Missing final readiness file: {path}")
 
     packet_text = packet.read_text() if packet.exists() else ""
     checklist_text = checklist.read_text() if checklist.exists() else ""
     readme_text = readme.read_text() if readme.exists() else ""
+    form_answers_text = form_answers.read_text() if form_answers.exists() else ""
 
     loom_url = _extract_line_url(packet_text, "Loom walkthrough link:")
     debug_url = _extract_line_url(packet_text, "AI-debugging screen recording link:")
@@ -290,8 +294,16 @@ def validate_final_readiness(root: Path = Path("artifacts/campaign_20260705")) -
         issues.append("README.md does not include the final Loom walkthrough URL.")
     if debug_url and f"- AI-debugging screen recording: {debug_url}" not in readme_text:
         issues.append("README.md does not include the final AI-debugging recording URL.")
+    if loom_url and f"- Loom walkthrough link: {loom_url}" not in form_answers_text:
+        issues.append("FORM_ANSWERS.md does not include the final Loom walkthrough URL.")
+    if debug_url and f"- AI-debugging screen recording link: {debug_url}" not in form_answers_text:
+        issues.append("FORM_ANSWERS.md does not include the final AI-debugging recording URL.")
 
-    for label, text in (("FINAL_SUBMISSION_PACKET.md", packet_text), ("SUBMISSION_CHECKLIST.md", checklist_text)):
+    for label, text in (
+        ("FINAL_SUBMISSION_PACKET.md", packet_text),
+        ("SUBMISSION_CHECKLIST.md", checklist_text),
+        ("FORM_ANSWERS.md", form_answers_text),
+    ):
         if FORM_URL not in text:
             issues.append(f"{label} is missing the official submission form URL.")
         if REPOSITORY_URL not in text:

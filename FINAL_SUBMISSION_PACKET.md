@@ -4,6 +4,8 @@ Use this page when filling out the Pretty Good AI submission form.
 
 Submission form: [Pretty Good AI - AI Engineer Submission](https://forms.gle/sdnbrJX2XbgZeQaY6)
 
+Form-answer sheet: [FORM_ANSWERS.md](FORM_ANSWERS.md)
+
 ## Form Fields
 
 - GitHub repository: [https://github.com/t7r0n/pretty-good-ai-voice-qa](https://github.com/t7r0n/pretty-good-ai-voice-qa)

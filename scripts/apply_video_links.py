@@ -30,6 +30,12 @@ def main() -> None:
                 f"- [x] 5-minute AI-debugging screen recording link: {debug}."
             ),
         },
+        "FORM_ANSWERS.md": {
+            "- Loom walkthrough link: Pending Loom walkthrough URL.": f"- Loom walkthrough link: {loom}",
+            "- AI-debugging screen recording link: Pending AI-debugging screen recording URL.": (
+                f"- AI-debugging screen recording link: {debug}"
+            ),
+        },
         "README.md": {
             "- [LOOM.md](LOOM.md): 5-minute walkthrough script.": (
                 f"- Loom walkthrough: {loom}\n"

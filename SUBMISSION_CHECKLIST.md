@@ -10,6 +10,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Reviewer brief: [REVIEWER_BRIEF.md](REVIEWER_BRIEF.md).
 - [x] Architecture doc: [ARCHITECTURE.md](ARCHITECTURE.md).
 - [x] Final submission packet: [FINAL_SUBMISSION_PACKET.md](FINAL_SUBMISSION_PACKET.md).
+- [x] Submission form-answer sheet: [FORM_ANSWERS.md](FORM_ANSWERS.md).
 - [x] Recording runbook: [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md).
 - [x] Evidence manifest: [EVIDENCE_MANIFEST.md](EVIDENCE_MANIFEST.md).
 - [x] PDF requirement audit: [REQUIREMENTS_AUDIT.md](REQUIREMENTS_AUDIT.md).
@@ -35,7 +36,7 @@ Status: ready for video recording and GitHub publication.
 - [x] Confirm `artifacts/campaign_20260705_clean/` is tracked.
 - [x] Confirm MP3 recordings open from GitHub.
 - [x] Confirm markdown links in `CALL_INDEX.md` and `BUG_REPORT.md` work on GitHub.
-- [x] Confirm top-level `README.md`, `FINAL_SUBMISSION_PACKET.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `LOOM.md`, and this checklist are visible at repo root.
+- [x] Confirm top-level `README.md`, `REVIEWER_BRIEF.md`, `FINAL_SUBMISSION_PACKET.md`, `FORM_ANSWERS.md`, `ARCHITECTURE.md`, `REQUIREMENTS_AUDIT.md`, `VOICE_QUALITY_REVIEW.md`, `CALL_INDEX.md`, `BUG_REPORT.md`, `EVIDENCE_MANIFEST.md`, `LOOM.md`, and this checklist are visible at repo root.
 
 ## Suggested Final Review Order
 
@@ -49,4 +50,5 @@ Status: ready for video recording and GitHub publication.
 8. Record AI-debugging walkthrough.
 9. Use [RECORDING_RUNBOOK.md](RECORDING_RUNBOOK.md) to keep both videos under 5 minutes and avoid showing `.env`.
 10. Apply video links with `uv run python scripts/apply_video_links.py --loom "$LOOM_URL" --debug "$DEBUG_RECORDING_URL"`.
-11. Commit, push, and submit the form.
+11. Fill the official form from [FORM_ANSWERS.md](FORM_ANSWERS.md), using the local `.env` Twilio caller number.
+12. Commit, push, and submit the form.

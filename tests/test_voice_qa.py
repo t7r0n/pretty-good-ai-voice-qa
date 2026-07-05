@@ -298,6 +298,17 @@ def test_final_readiness_passes_with_video_links(tmp_path: Path, monkeypatch) ->
         )
         + "\n"
     )
+    (tmp_path / "FORM_ANSWERS.md").write_text(
+        "\n".join(
+            [
+                f"Official form: [{FORM_URL}]({FORM_URL})",
+                f"- GitHub repository: [{REPOSITORY_URL}]({REPOSITORY_URL})",
+                f"- Loom walkthrough link: {loom}",
+                f"- AI-debugging screen recording link: {debug}",
+            ]
+        )
+        + "\n"
+    )
 
     result = validate_final_readiness(campaign)
 
@@ -310,6 +321,7 @@ def _write_submission_fixture(workspace: Path, complete_calls: int) -> Path:
         "ARCHITECTURE.md",
         "REVIEWER_BRIEF.md",
         "RECORDING_RUNBOOK.md",
+        "FORM_ANSWERS.md",
         "REQUIREMENTS_AUDIT.md",
         "VOICE_QUALITY_REVIEW.md",
         "CALL_INDEX.md",
